@@ -8,6 +8,7 @@
  *
  */
 
+#include <unistd.h>
 #include <iostream>
 #include "opencv2/highgui.hpp"
 #include "opencv2/imgcodecs.hpp"
@@ -28,6 +29,12 @@ int main(int argc, char** argv) {
     return 1;
   }
 
+  auto filename = argv[1];
+  if (access(filename, F_OK) == -1) {
+    cerr << "Image doesn't exists: " << filename << endl;
+    return 1;
+  }
+
   Mat src;
   Mat src_gray;
   int thresh = 100;
@@ -35,7 +42,7 @@ int main(int argc, char** argv) {
   RNG rng(12345);
 
   /// Load source image, making sure to preserve the alpha channel
-  src = imread(argv[1], -1);
+  src = imread(filename, -1);
 
   // Convert transparent pixels to black, and non-transparent
   // pixels to white to simplify the contour-finding.
