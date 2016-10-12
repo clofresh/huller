@@ -37,7 +37,7 @@ int main(int argc, char** argv) {
   /// Load source image, making sure to preserve the alpha channel
   src = imread(argv[1], -1);
 
-  // Convert an transparent pixels to black, and non-transparent
+  // Convert transparent pixels to black, and non-transparent
   // pixels to white to simplify the contour-finding.
   for (int i = 0; i < src.rows; ++i) {
     Vec4b* row = src.ptr<Vec4b>(i);
