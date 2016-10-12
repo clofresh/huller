@@ -19,7 +19,15 @@ using namespace std;
 /**
  * @function main
  */
-int main(int, char** argv) {
+int main(int argc, char** argv) {
+  if (argc < 2) {
+    cerr << "Must specify a path to an image" << endl;
+    return 1;
+  } else if (argc > 2) {
+    cerr << "Must specify only one image" << endl;
+    return 1;
+  }
+
   Mat src;
   Mat src_gray;
   int thresh = 100;
